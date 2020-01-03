@@ -6,6 +6,16 @@ Scripts designed to be composable by pipe and standard unix utilities. There are
 - csv2ledger
 - xml2ledger
 
+Workflow shell be like the following:
+for the Privat24
+
+fetch -> xml2ledger -> ledger
+
+
+for the Payoneer
+
+manually download -> csv2ledger -> ledger
+
 ## Dependencies
 - python3
 - pipenv
@@ -15,7 +25,7 @@ issue command `pipenv sync` to install python dependencies
 
 ### Privat24 xml fetch
 
-setup merchant account according to the [https://api.privatbank.ua/#p24/orders|Privat24 Merchant APIp]
+setup merchant account according to the [Privat24 Merchant API](https://api.privatbank.ua/#p24/ordersPrivat24)
 
 for further steps you neer to have Merchant ID and Merchant password, for the convenience you can setup environment variables
 
@@ -80,6 +90,12 @@ P 2019/01/01 02:18:01 EUR $1.12
 P 2019/01/01 02:18:01 NOK $0.11
 
 ```
+
+For the currency history you can use GOOGLEFINANCE function from the google sheets and your sheet like this
+
+`=GOOGLEFINANCE("CURRENCY:UAHUSD","price",date)`
+
+Run combined ledger as following:
 
 `ledger -f currencies.ledger -f combined.ledger -V bal`
 
